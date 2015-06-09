@@ -1,0 +1,17 @@
+name: ci_devstack
+summary: <Fill in summary here>
+maintainer: Your Name <Your.Name@TIROGER-LAP.redmond.corp.microsoft.com>
+description: |
+  <Multi-line description here>
+categories:
+  - misc
+subordinate: false
+provides:
+  provides-relation:
+    interface: interface-name
+requires:
+  requires-relation:
+    interface: interface-name
+peers:
+  peer-relation:
+    interface: interface-name
