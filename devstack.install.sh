@@ -1,12 +1,3 @@
-#!/bin/bash
-# Here do anything needed to install the service
-# i.e. apt-get install -y foo  or  bzr branch http://myserver/mycode /srv/webroot
-# Make sure this hook exits cleanly and is idempotent, common problems here are
-# failing to account for a debconf question on a dependency, or trying to pull
-# from github without installing git first.
-
-### apt-get install -y ci_devstack
-
 ########
 # DevStack installation
 ########
@@ -19,12 +10,10 @@
 ### Variables
 # Magic variable for VLANs.  Replace with a script call eventually.
 VLAN_RANGE='175:199'
-ZUUL_BRANCH=master
-ZUUL_PROJECT='openstack/neutron'
-ZUUL_REF='refs/zuul/master/Z7bda54c8acd04fa7bdb089f7a3037b26'
-ZUUL_CHANGE=176711
-#ZUUL_SITE=`echo "$ZUUL_URL" |sed 's/.\{2\}$//'`
-ZUUL_SITE=http://zuul.openstack.tld
+#ZUUL_BRANCH
+#ZUUL_PROJECT
+#ZUUL_REF
+#ZUUL_CHANGE
 
 
 sudo rm -rf /var/lib/apt/lists/*
@@ -50,6 +39,7 @@ sed -i 's/export OS_AUTH_URL.*/export OS_AUTH_URL=http:\/\/127.0.0.1:5000\/v2.0\
 ########
 
 /home/ubuntu/bin/update_devstack_repos.sh --branch $ZUUL_BRANCH --build-for $ZUUL_PROJECT
+ZUUL_SITE=`echo "$ZUUL_URL" |sed 's/.\{2\}$//'`
 /home/ubuntu/bin/gerrit-git-prep.sh --zuul-site $ZUUL_SITE --gerrit-site $ZUUL_SITE --zuul-ref $ZUUL_REF --zuul-change $ZUUL_CHANGE --zuul-project $ZUUL_PROJECT
 
 ########
